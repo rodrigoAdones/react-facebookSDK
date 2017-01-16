@@ -1,5 +1,5 @@
 import React from 'react'
-import { ControlLabel, FormGroup, FormControl, Panel, Button } from 'react-bootstrap'
+import { ControlLabel, FormGroup, FormControl, Panel, Button, Col } from 'react-bootstrap'
 import FacebookButton from './facebookButton'
 
 export default class Login extends React.Component {
@@ -25,10 +25,14 @@ export default class Login extends React.Component {
           />
         </FormGroup>
         <FormGroup>
-          <Button>
-            Log-in
-          </Button>
-          <a href=''>Register</a>
+          <Col md={6}>
+            <Button>
+              Log-in
+            </Button>
+          </Col>
+          <Col md={6}>
+            <a href=''>Register</a>
+          </Col>
         </FormGroup>
         <FormGroup>
           <FacebookButton onConnect={this.props.onChangeToken} />

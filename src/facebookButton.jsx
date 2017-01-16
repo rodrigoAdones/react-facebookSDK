@@ -13,7 +13,6 @@ export default class FacebookButton extends React.Component {
     FB.getLoginStatus(function (response) {
       console.log(response)
       if (response.status === 'connected') {
-        console.log('Logged in.')
         changeToken(response.authResponse.accessToken)
       } else {
         FB.login()
@@ -22,7 +21,7 @@ export default class FacebookButton extends React.Component {
   }
 
   render () {
-    return <Button bsStyle='primary' onClick={this.connectFB}>
+    return <Button bsStyle='primary' bsSize='large' onClick={this.connectFB}>
       Facebook
     </Button>
   }
