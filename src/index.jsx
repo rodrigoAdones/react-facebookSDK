@@ -14,11 +14,12 @@ class App extends React.Component {
 
     this.changeToken = this.changeToken.bind(this)
     this.checkConnection = this.checkConnection.bind(this)
+    this.changeStatusSDK = this.changeStatusSDK.bind(this)
   }
 
   componentDidMount () {
-    const auxConnection = this.checkConnection
     const changeToken = this.changeToken
+    const changeStatusSDK = this.changeStatusSDK
     const loadFacebook = new Promise(
       function (resolve, reject) {
         window.fbAsyncInit = function() {
@@ -47,11 +48,9 @@ class App extends React.Component {
     )
 
     loadFacebook.then(
-      this.setState({
-        sdkLoaded: true
-      })
       function (message) {
         console.log(message)
+        changeStatusSDK(true)
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
             changeToken(response.authResponse.accessToken)
@@ -61,14 +60,6 @@ class App extends React.Component {
     )
   }
 
-  checkConnection () {
-    changeToken = this.changeToken
-    FB.getLoginStatus(function (response) {
-      if (response.status === 'connected') {
-        changeToken(response.authResponse.accessToken)
-      }
-    })
-  }
 
   render () {
     if (this.state.sdkLoaded) {
@@ -93,11 +84,24 @@ class App extends React.Component {
     }
   }
 
+  checkConnection () {
+    const changeToken = this.changeToken
+    FB.getLoginStatus(function (response) {
+      if (response.status === 'connected') {
+        changeToken(response.authResponse.accessToken)
+      }
+    })
+  }
   changeToken (value = '') {
     this.setState({
       token: value
     })
     console.log(this.state.token)
+  }
+  changeStatusSDK (value = false) {
+    this.setState({
+      sdkLoaded: value
+    })
   }
 }
 
