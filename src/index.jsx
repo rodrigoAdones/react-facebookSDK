@@ -49,7 +49,7 @@ class App extends React.Component {
 
     loadFacebook.then(
       function (message) {
-        console.log(message)
+        //console.log(message)
         changeStatusSDK(true)
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
@@ -96,7 +96,7 @@ class App extends React.Component {
     this.setState({
       token: value
     })
-    console.log(this.state.token)
+    // console.log(this.state.token)
   }
   changeStatusSDK (value = false) {
     this.setState({
